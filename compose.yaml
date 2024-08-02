@@ -1,0 +1,124 @@
+version: '3.4'
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 20s
+      timeout: 10s
+      retries: 5
+    networks:
+      - my_network
+
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 40s
+      timeout: 10s
+      retries: 5
+    networks:
+      - my_network
+
+  uploading_service:
+    build:
+      context: ./uploading_service
+    container_name: uploading_service
+    ports:
+      - "4000:4000"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - my_network
+
+  submission_service:
+    build:
+      context: ./submission-service
+    container_name: submission_service
+    ports:
+      - "4004:4004"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    networks:
+      - my_network
+
+  solver_service:
+    build:
+      context: ./solver
+    container_name: solver_service
+    ports:
+      - "4001:4001"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    networks:
+      - my_network
+
+  solutions_service:
+    build:
+      context: ./solutions-service
+    container_name: solutions_service
+    ports:
+      - "4005:4005"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    networks:
+      - my_network
+
+  user-management:
+    build:
+      context: ./user-management
+    container_name: user-management
+    ports:
+      - "3001:3001"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - my_network
+
+  credits_service:
+    build:
+      context: ./credits-service
+    container_name: credits_service
+    ports:
+      - "4003:4003"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    networks:
+      - my_network
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - my_network
+    environment:
+      - NODE_ENV=development
+
+
+networks:
+  my_network:
+    driver: bridge
