@@ -1,0 +1,6 @@
+{
+  "Sub": 666,
+  "ProblemId": "1c022188-05da-4dcc-94a7-49fb9bca5c56",
+  "Duration": 273,
+  "Stdout": "Objective: 1243477\r\nRoute for vehicle 0:\r\n 0 ->  12 ->  7 ->  13 ->  2 ->  4 -> 0\r\nDistance of the route: 8361m\r\n\r\nRoute for vehicle 1:\r\n 0 -> 0\r\nDistance of the route: 0m\r\n\r\nRoute for vehicle 2:\r\n 0 ->  8 ->  17 ->  11 ->  3 ->  10 ->  15 ->  19 ->  5 -> 0\r\nDistance of the route: 12109m\r\n\r\nRoute for vehicle 3:\r\n 0 -> 0\r\nDistance of the route: 0m\r\n\r\nRoute for vehicle 4:\r\n 0 -> 0\r\nDistance of the route: 0m\r\n\r\nRoute for vehicle 5:\r\n 0 -> 0\r\nDistance of the route: 0m\r\n\r\nRoute for vehicle 6:\r\n 0 -> 0\r\nDistance of the route: 0m\r\n\r\nRoute for vehicle 7:\r\n 0 -> 0\r\nDistance of the route: 0m\r\n\r\nRoute for vehicle 8:\r\n 0 -> 0\r\nDistance of the route: 0m\r\n\r\nRoute for vehicle 9:\r\n 0 ->  18 ->  16 ->  14 ->  9 ->  6 ->  1 -> 0\r\nDistance of the route: 12107m\r\n\r\nMaximum of the route distances: 12109m\r\n"
+}

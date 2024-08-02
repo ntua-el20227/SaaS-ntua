@@ -1,0 +1,9 @@
+{
+  "v_number": "10",
+  "depot": "0",
+  "max_dist": "100000",
+  "sub": 666,
+  "solver_name": "vrpSolver",
+  "problemId": "1c022188-05da-4dcc-94a7-49fb9bca5c56",
+  "current_time": "2024-07-04T23:51:12.416Z"
+}
